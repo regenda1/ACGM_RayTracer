@@ -24,14 +24,16 @@ float acgm::Camera::GetLightIntensity() const
   return light_intensity_;
 };
 
-cogs::Color3f acgm::Camera::ZNearFarColor(glm::vec3 point, cogs::Color3f color) const
+bool acgm::Camera::ZNearFarColor(glm::vec3 point, cogs::Color3f color) const
 {
   // z near, z far clipping
   float distance = glm::dot(lookDirection_, point - position_);
   if ((distance > nearZ_) && (distance < farZ_))
-  { return color; }
+  { return false; }
   else
-  { return cogs::Color3f(0.0f, 0.0f, 0.0f); }
+  {
+    return true;
+  }
 };
 
 float acgm::Camera::GetZNear() const
@@ -56,5 +58,5 @@ void acgm::Camera::SetHeight(int h)
 
 void acgm::Camera::SetAspectRatio()
 {
-	aspectRatio_ = (float)screenWidth_ / (float)screenHeight_;
+  aspectRatio_ = (float)screenWidth_ / (float)screenHeight_;
 }

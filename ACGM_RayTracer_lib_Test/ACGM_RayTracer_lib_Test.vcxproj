@@ -44,6 +44,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnvironmentTest.cpp" />
     <ClCompile Include="IntersectionTests.cpp" />
     <ClCompile Include="LightTest.cpp" />
     <ClCompile Include="pch.cpp">
@@ -52,6 +53,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RayTest.cpp" />
     <ClCompile Include="ShaderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +98,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>COGS.lib;HIRO.lib;glbinding.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>COGS.lib;HIRO.lib;HIRO_DRAW.lib;glbinding.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,7 +132,7 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>COGS.lib;HIRO.lib;glbinding.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>COGS.lib;HIRO.lib;HIRO_DRAW.lib;glbinding.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

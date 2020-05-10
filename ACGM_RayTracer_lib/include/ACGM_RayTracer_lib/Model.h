@@ -20,12 +20,12 @@ namespace acgm
   public:
     Model();
     virtual ~Model() = default;
-    virtual std::optional<IntersectionReturn> intersection(const acgm::Ray &ray) const = 0;
-    std::shared_ptr<acgm::Shader> GetShader() const;
-    void SetShader(std::shared_ptr<acgm::Shader> shader);
+    virtual std::optional<IntersectionReturn> intersection(const acgm::Ray &ray) const = 0; //compute ray, model intersection
+    std::shared_ptr<acgm::Shader> GetShader() const; //get model shader
+    void SetShader(std::shared_ptr<acgm::Shader> shader); //set model shader
     std::string name_;
   protected:
     float intersectionEpsilon_;
-    std::shared_ptr<acgm::Shader> shader_;
+    std::shared_ptr<acgm::Shader> shader_; //model shader
   };
 }

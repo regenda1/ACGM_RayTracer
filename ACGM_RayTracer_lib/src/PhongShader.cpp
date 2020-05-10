@@ -7,13 +7,17 @@ acgm::PhongShader::PhongShader()
   materialShine_ = 50.0f;
 };
 
-acgm::PhongShader::PhongShader(cogs::Color3f color, float shininess, float ambient, float diffuse, float specular)
+acgm::PhongShader::PhongShader(cogs::Color3f color, float shininess, float ambient, float diffuse, float specular,
+  float glosiness, float transparency, float refractiv_index)
 {
   diffuzeConst_ = diffuse;
   specularConst_ = specular;
   materialShine_ = shininess;
   color_ = color;
   ambient_ = ambient;
+  glosiness_ = glosiness;
+  transparency_ = transparency;
+  refractiveIndex_ = refractiv_index;
 };
 
 
@@ -40,3 +44,18 @@ cogs::Color3f acgm::PhongShader::CalculateColor(const ShaderInput &input) const
     return ambient * color_;
   }
 };
+
+float acgm::PhongShader::GetGlossiness(glm::vec3 &point) const
+{
+  return glosiness_;
+}
+
+float acgm::PhongShader::GetTransparency(glm::vec3 &point) const
+{
+  return transparency_;
+}
+
+float acgm::PhongShader::GetRefractiveIndex(glm::vec3 &point) const
+{
+  return refractiveIndex_;
+}

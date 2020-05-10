@@ -1,7 +1,7 @@
 #pragma once
 #include <HIRO/HIRO.h>
 
-
+//struct for make input for shader
 struct ShaderInput
 {
   glm::vec3 point;

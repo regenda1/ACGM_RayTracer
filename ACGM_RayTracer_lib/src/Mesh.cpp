@@ -23,11 +23,10 @@ acgm::Mesh::Mesh(const std::string &fileName, glm::mat4 transform)
   intersectionEpsilon_ = 0.00001f;
 }
 
-// is used inscene
-acgm::Mesh::Mesh(const cogs::Color3f &color)
+// is used in scene
+acgm::Mesh::Mesh(const cogs::Color3f &color, const std::string &fileName)
 {
-  mesh_.Import("C:/Users/Dell/Documents/FIIT/10. semester/ACGM/3d-models/bunny.fbx");
-  std::cout << "Models/Mesh: mesh has points " << mesh_.HasFaces() << std::endl;
+  mesh_.Import(fileName);
   indicesToMeshPoints_ = mesh_.faces->GetFaces();
   transform_.SetScaling(glm::vec3(0.5f, 0.5f, 0.5f));
   transform_.SetRotation(glm::quat(glm::vec3(glm::radians(90.0f), glm::radians(0.0f), glm::radians(180.0f))));
@@ -46,13 +45,13 @@ std::optional <IntersectionReturn> acgm::Mesh::intersection(const acgm::Ray &ray
   glm::vec3 desired_normal = glm::vec3(0.0f, 0.0f, 0.0f); //normal of triangle
 
   // go trought triangles
-  for (auto indice : indicesToMeshPoints_) 
+  for (auto indice : indicesToMeshPoints_)
   {
     // get normal of face
     glm::vec3 faceNormal = glm::cross((meshPoints_[indice.x] - meshPoints_[indice.y]),
         (meshPoints_[indice.x] - meshPoints_[indice.z]));
     float t = glm::dot((meshPoints_[indice.x] - ray.getP()), faceNormal) / glm::dot(ray.getD(), faceNormal); //get intersection distance
-    glm::vec3 point = ray.getP() + ray.getD() * t; 
+    glm::vec3 point = ray.getP() + ray.getD() * t;
 
     // condition, if is inside of triangle
     glm::vec3 edge0 = meshPoints_[indice.y] - meshPoints_[indice.x];

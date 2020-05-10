@@ -19,7 +19,7 @@ float acgm::PointLight::GetIntensityAt(const glm::vec3 &point) const
 {
   float d = glm::distance(point, position_);
   float l = range_ / (range_ + d * attL_);
-  float q = glm::pow(range_, 2.0f) / (glm::pow(range_, 2.0f) + glm::pow(d, 2.0f) * attQ_);
+  float q = range_ * range_ / (range_ * range_ + d * d * attQ_);
   return l * q * intensity_;
 };
 

@@ -9,7 +9,7 @@ namespace acgm
   {
   public:
     Camera();
-    Camera(glm::vec3 pos, glm::vec3 upVec, glm::vec3 target, float zNear, float zFar, float fov);
+    Camera(glm::vec3 pos, glm::vec3 upVec, glm::vec3 target, float zNear, float zFar, float fov);//init parameters
     glm::vec3 GetPosition() const { return position_; };
     glm::vec3 GetUpVector() const { return upVector_; };
     glm::vec3 GetRightVector() const  { return rightVector_; };
@@ -23,8 +23,8 @@ namespace acgm
     float GetZFar() const;
     void SetWidth(int w);
     void SetHeight(int h);
-	void SetAspectRatio();
-    cogs::Color3f ZNearFarColor(glm::vec3 point, cogs::Color3f color) const;
+    void SetAspectRatio();
+    bool ZNearFarColor(glm::vec3 point, cogs::Color3f color) const; // z-near, z-far clipping
   private:
     glm::vec3 position_;
     glm::vec3 target_;
@@ -36,7 +36,7 @@ namespace acgm
     float fieldOfView_;
     float aspectRatio_;
     float light_intensity_;
-    float farZ_;
-    float nearZ_;
+    float farZ_; //max z till can be saw
+    float nearZ_; //min z from can be saw
   };
 };

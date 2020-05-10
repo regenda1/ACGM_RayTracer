@@ -8,13 +8,13 @@ namespace acgm
   class Plane : public acgm::Model
   {
   public:
-    Plane();
-    Plane(glm::vec3 qArg, glm::vec3 nArg);
-    virtual std::optional<IntersectionReturn> intersection(const acgm::Ray &ray) const override;
-    glm::vec3 GetQ() const { return q_; };
-    glm::vec3 GetN() const { return n_; };
+    Plane(); //for scene
+    Plane(glm::vec3 qArg, glm::vec3 nArg); //for scene importer
+    virtual std::optional<IntersectionReturn> intersection(const acgm::Ray &ray) const override; //compute ray plane intersection
+    glm::vec3 GetQ() const { return q_; }; //get point of plane
+    glm::vec3 GetN() const { return n_; }; //get normal of plane
   private:
-    glm::vec3 q_;
-    glm::vec3 n_;
+    glm::vec3 q_; //plane point
+    glm::vec3 n_; //plane normal
   };
 };

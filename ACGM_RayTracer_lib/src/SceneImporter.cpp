@@ -6,6 +6,7 @@
 #include <ACGM_RayTracer_lib/Mesh.h>
 #include <ACGM_RayTracer_lib/Shader.h>
 #include <ACGM_RayTracer_lib/Camera.h>
+#include <ACGM_RayTracer_lib/Image.h>
 
 
 
@@ -172,9 +173,13 @@ std::shared_ptr<acgm::Shader> acgm::SceneImporter::ReadShader()
     const auto ambient = ReadFloat();
     const auto diffuse = ReadFloat();
     const auto specular = ReadFloat();
+    const auto glossiness = ReadFloat(); // #UNLOCKED at Reflection seminar
+    const auto transparency = ReadFloat(); // #UNLOCKED at Transparency seminar
+    const auto refractive_index = ReadFloat(); // #UNLOCKED at Transparency seminar
     GetLine();
     // shader = #TODO new instance of PhongShader object
-    shader = std::make_shared<PhongShader>(color, shininess, ambient, diffuse, specular);
+    shader = std::make_shared<PhongShader>(color, shininess, ambient, diffuse, specular,
+        glossiness, transparency, refractive_index);
   }
   if (shader_type == SHADERTYPE_CHECKER)
   {
@@ -226,11 +231,18 @@ std::shared_ptr<acgm::Light> acgm::SceneImporter::ReadLight()
 
 std::shared_ptr<acgm::Scene> acgm::SceneImporter::ReadScene()
 {
+  const auto bias = ReadFloat();
+  const auto index_of_refraction = ReadFloat(); // #UNLOCKED at Transparency seminar
+  const auto enviro_up = ReadVec3();            // #UNLOCKED at Environment seminar
+  const auto enviro_seam = ReadVec3();          // #UNLOCKED at Environment seminar
+  auto enviro_image_file = GetLine();           // #UNLOCKED at Environment seminar
+  std_ext::Trim(enviro_image_file);
   const auto camera = ReadCamera();
   const auto light = ReadLight();
   const auto models = ReadModels();
 
   // #TODO Create your scene object and set imported camera, light and models to it
-  std::shared_ptr<Scene> scene = std::make_shared<Scene>(camera, light, models);
+  std::shared_ptr<Scene> scene = std::make_shared<Scene>(camera, light, models, enviro_image_file,
+      enviro_up, enviro_seam, index_of_refraction);
   return scene;
 }

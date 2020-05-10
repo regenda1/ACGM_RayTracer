@@ -21,5 +21,7 @@ private:
   hiro::draw::PRasterStyle style_;
   hiro::gui::Droplist *model_selector_;
   hiro::gui::Button *button_;
+  hiro::gui::NumericInt *maxRefDepth_;
+  hiro::gui::NumericInt *maxTransDepth_;
   std::shared_ptr<acgm::SceneImporter> sceneImporter_;
 };
